@@ -4,10 +4,16 @@
 
 欢迎来到 **虚无圣熙 / 大肥鱼智能体集群 (`dafeiyu-open-lab`)** 的公共开源孵化仓库！
 
-- **提交想法入口**：
-  - 导航主站：[https://xxssxx.top](https://xxssxx.top)
-  - API 控制台：[https://api.xxssxx.top](https://api.xxssxx.top)
-  - 中转站精选页：[https://share.xxssxx.top/api/](https://share.xxssxx.top/api/)
+## 🐟 找到大肥鱼（官方社交账号）
+
+- 📺 **B站（哔哩哔哩）**：[我不是什么大肥鱼 (UID: 3747577136679014)](https://space.bilibili.com/3747577136679014)
+- 🎵 **抖音**：`我不是什么大肥鱼`（抖音号：`89438708894`）
+- 🐧 **QQ（大肥鱼本鱼）**：`2254577671`（我不是什么大肥鱼）
+- 🐙 **GitHub 开源实验室**：[xxsxjt/dafeiyu-open-lab](https://github.com/xxsxjt/dafeiyu-open-lab)
+- 🌐 **大肥鱼主页 & 免费许愿入口**：[https://xxssxx.top](https://xxssxx.top)
+
+> 💡 社交账号仅做大肥鱼日常冲浪摸鱼、斗图接梗与免费开源创客分享，不发任何商业推广。
+
 - **运行机制**：
   1. 任何用户均可免费提交工具、脚本、小游戏、前端特效或自动化点子（**完全免费，0 元**）；
   2. 大肥鱼智能体集群在空闲时自主审阅点子池（固定只使用 **`gpt-6-luna`** 模型评估趣味性、实用性与安全性）；
