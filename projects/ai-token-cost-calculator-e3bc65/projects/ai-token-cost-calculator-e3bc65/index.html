@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <title>Token Cost Lab · AI 费用速算器</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080d19;--panel:rgba(17,25,43,.78);--line:rgba(168,190,235,.13);--muted:#95a3bd;--text:#edf3ff;--cyan:#71e4dc;--violet:#a896ff;--green:#8fe6b4;--shadow:0 24px 70px rgba(0,0,0,.34)}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 2%,rgba(47,118,152,.22),transparent 36%),radial-gradient(ellipse at 88% 8%,rgba(114,76,185,.24),transparent 35%),linear-gradient(160deg,#080d19,#0b1020 55%,#0a1220);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+    button,input,select{font:inherit}button{cursor:pointer}.wrap{width:min(1100px,calc(100% - 36px));margin:auto;padding:44px 0 28px;position:relative}.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}.brand{display:flex;align-items:center;gap:11px;font-weight:750;letter-spacing:.02em}.brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#70e5db,#9c8cff);display:grid;place-items:center;color:#101827;font-size:18px;box-shadow:0 0 28px #71e4dc33}.badge{color:#a9bad6;border:1px solid var(--line);padding:6px 11px;border-radius:999px;font-size:12px;background:#ffffff05}.hero{margin-bottom:27px}.eyebrow{color:var(--cyan);font-size:12px;text-transform:uppercase;letter-spacing:.16em;font-weight:700}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.12;letter-spacing:-.045em;margin:10px 0 12px}.hero h1 span{background:linear-gradient(90deg,#eafaff,#8fe8df 50%,#b8a8ff);background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:650px;margin:0}.layout{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(330px,.96fr);gap:18px;align-items:start}.card{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(18px);border-radius:20px;box-shadow:var(--shadow)}.form-card{padding:23px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:19px}.section-head h2{font-size:16px;margin:0}.section-head small{color:var(--muted);font-size:12px}.field{margin-bottom:17px}.field label,.label-row{display:flex;justify-content:space-between;align-items:center;color:#d8e2f5;font-size:13px;margin-bottom:8px}.hint{font-size:11px;color:#7888a4}.control{width:100%;border:1px solid rgba(170,191,233,.16);border-radius:11px;padding:12px 13px;color:var(--text);background:rgba(7,13,25,.72);outline:none;transition:border .2s,box-shadow .2s}.control:focus{border-color:#79dcd7;box-shadow:0 0 0 3px #71e4dc18}.control::placeholder{color:#66738a}select.control{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%2395a3bd' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}.row{display:grid;grid-template-columns:1fr 1fr;gap:13px}.unit-wrap{position:relative}.unit-wrap .control{padding-right:72px}.unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;color:#7585a0;pointer-events:none}.divider{height:1px;background:var(--line);margin:20px 0}.rate-box{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rate-box .field{margin:0}.custom-prices{display:none;grid-template-columns:1fr 1fr;gap:12px;padding:14px;background:#ffffff04;border:1px solid var(--line);border-radius:13px;margin:-3px 0 17px}.custom-prices.show{display:grid}.custom-prices .field{margin:0}.result-card{padding:23px;position:sticky;top:18px;overflow:hidden}.result-card:before{content:"";position:absolute;width:230px;height:230px;right:-100px;top:-130px;border-radius:50%;background:#8a75ff22;filter:blur(3px);pointer-events:none}.result-head{display:flex;justify-content:space-between;align-items:center;position:relative}.result-head h2{font-size:16px;margin:0}.live{display:flex;align-items:center;gap:7px;color:#91dcb4;font-size:11px}.dot{width:7px;height:7px;background:#78dfa9;border-radius:50%;box-shadow:0 0 10px #78dfa9}.main-price{margin:24px 0 19px;padding:19px;border-radius:15px;background:linear-gradient(125deg,#72e4dc13,#a18bff12);border:1px solid #a6a7ff1c}.price-label{font-size:12px;color:#aab8d0}.price-line{display:flex;align-items:baseline;gap:9px;margin:4px 0 3px}.price-usd{font-size:35px;font-weight:750;letter-spacing:-.04em}.price-cny{font-size:15px;color:var(--cyan)}.price-note{font-size:11px;color:#8593ac}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{border:1px solid var(--line);background:#ffffff04;border-radius:13px;padding:13px}.stat-label{font-size:11px;color:#8998b3}.stat-value{font-size:18px;font-weight:700;margin-top:5px;letter-spacing:-.02em}.stat-sub{font-size:11px;color:#7888a4;margin-top:1px}.breakdown{margin-top:20px}.breakdown-title{font-size:12px;color:#aab8d0;margin-bottom:10px}.break-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #ffffff09;font-size:12px}.break-row:last-child{border:0}.break-row span:first-child{color:#93a1b9}.break-row span:last-child{font-variant-numeric:tabular-nums}.copy-btn{width:100%;margin-top:16px;border:0;border-radius:11px;padding:12px;color:#07141c;font-weight:750;background:linear-gradient(100deg,#7ce5d6,#a9a0ff);box-shadow:0 8px 25px #79dcd721;transition:transform .15s,filter .15s}.copy-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.copy-btn:active{transform:translateY(0)}.note{font-size:11px;color:#74839c;line-height:1.65;margin-top:14px}.footer{display:flex;justify-content:space-between;gap:16px;color:#687894;font-size:11px;margin-top:22px}.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,12px);padding:10px 16px;border:1px solid var(--line);border-radius:10px;background:#172239;color:var(--text);opacity:0;pointer-events:none;transition:.22s;box-shadow:var(--shadow);z-index:4}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:760px){.wrap{padding-top:25px}.topline{margin-bottom:27px}.layout{grid-template-columns:1fr}.result-card{position:static}.hero{margin-bottom:21px}}@media(max-width:420px){.wrap{width:calc(100% - 24px)}.form-card,.result-card{padding:17px}.row{gap:9px}.price-usd{font-size:30px}.footer{flex-direction:column;gap:5px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="topline"><div class="brand"><span class="brand-mark">✦</span><span>Token Cost Lab</span></div><span class="badge">免费 · 本地计算</span></header>
+    <section class="hero"><div class="eyebrow">AI API COST ESTIMATOR</div><h1>每一枚 Token，<span>都算得清楚。</span></h1><p>输入 Token 用量与服务商倍率，即时估算单次调用和批量成本。所有计算均在浏览器本地完成。</p></section>
+    <div class="layout">
+      <section class="card form-card" aria-label="费用参数">
+        <div class="section-head"><h2>计算参数</h2><small>按需调整，结果实时更新</small></div>
+        <div class="field"><label for="model">模型 <span class="hint">价格为 USD / 百万 Token</span></label><select class="control" id="model">
+          <option value="gemini-3.8-flash">Gemini 3.8 Flash</option><option value="gpt-6-luna">GPT-6 Luna</option><option value="claude-4.5-sonnet">Claude 4.5 Sonnet</option><option value="gpt-4o">GPT-4o</option><option value="claude-3.7-sonnet">Claude 3.7 Sonnet</option><option value="custom">自定义模型 / 单价</option>
+        </select></div>
+        <div class="custom-prices" id="customPrices">
+          <div class="field"><label for="inputPrice">输入单价</label><div class="unit-wrap"><input class="control" id="inputPrice" type="number" min="0" step="0.01" value="0.5"><span class="unit">USD / 1M</span></div></div>
+          <div class="field"><label for="outputPrice">输出单价</label><div class="unit-wrap"><input class="control" id="outputPrice" type="number" min="0" step="0.01" value="1.5"><span class="unit">USD / 1M</span></div></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="promptTokens">Prompt Token</label><div class="unit-wrap"><input class="control" id="promptTokens" type="number" min="0" step="100" value="2000"><span class="unit">tokens</span></div></div>
+          <div class="field"><label for="completionTokens">Completion Token</label><div class="unit-wrap"><input class="control" id="completionTokens" type="number" min="0" step="100" value="1000"><span class="unit">tokens</span></div></div>
+        </div>
+        <div class="field"><label for="calls">调用次数 <span class="hint">用于批量成本估算</span></label><div class="unit-wrap"><input class="control" id="calls" type="number" min="1" step="1" value="1000"><span class="unit">次</span></div></div>
+        <div class="divider"></div>
+        <div class="section-head"><h2>服务商与汇率</h2><small>倍率作用于基础模型费用</small></div>
+        <div class="rate-box">
+          <div class="field"><label for="provider">中转站分组</label><select class="control" id="provider"><option value="1">官方 / 直连（1×）</option><option value="1.2">普通分组（1.2×）</option><option value="1.5" selected>标准分组（1.5×）</option><option value="2">高倍率分组（2×）</option><option value="custom">自定义倍率</option></select></div>
+          <div class="field"><label for="multiplier">实际倍率</label><div class="unit-wrap"><input class="control" id="multiplier" type="number" min="0" step="0.1" value="1.5"><span class="unit">×</span></div></div>
+        </div>
+        <div class="field" style="margin:12px 0 0"><label for="exchange">美元兑人民币汇率 <span class="hint">可自行更新</span></label><div class="unit-wrap"><input class="control" id="exchange" type="number" min="0" step="0.01" value="7.20"><span class="unit">CNY / USD</span></div></div>
+      </section>
+      <aside class="card result-card" aria-live="polite">
+        <div class="result-head"><h2>费用估算</h2><span class="live"><i class="dot"></i>实时计算</span></div>
+        <div class="main-price"><div class="price-label">单次调用 · 含服务商倍率</div><div class="price-line"><span class="price-usd" id="singleUsd">$0.000000</span><span class="price-cny" id="singleCny">≈ ¥0.0000</span></div><div class="price-note" id="modelCaption">Gemini 3.8 Flash · 标准分组 1.5×</div></div>
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-label">批量总成本</div><div class="stat-value" id="totalUsd">$0.000000</div><div class="stat-sub" id="totalCny">≈ ¥0.0000</div></div>
+          <div class="stat"><div class="stat-label">1000 次调用</div><div class="stat-value" id="thousandUsd">$0.000000</div><div class="stat-sub" id="thousandCny">≈ ¥0.0000</div></div>
+        </div>
+        <div class="breakdown"><div class="breakdown-title">单次费用拆分（倍率前）</div>
+          <div class="break-row"><span>输入 Token 费用</span><span id="inputCost">$0.000000</span></div>
+          <div class="break-row"><span>输出 Token 费用</span><span id="outputCost">$0.000000</span></div>
+          <div class="break-row"><span>基础费用 × 分组倍率</span><span id="multiplierCost">$0.000000</span></div>
+        </div>
+        <button class="copy-btn" id="copyBtn" type="button">复制估算结果</button>
+        <p class="note">估算公式： (输入 Token × 输入单价 + 输出 Token × 输出单价) ÷ 1,000,000 × 倍率。实际账单可能因缓存、上下文分段、计费规则及汇率波动而不同。</p>
+      </aside>
+    </div>
+    <footer class="footer"><span>Token Cost Lab · 轻量开源计算器</span><span>模型单价仅供估算，请以服务商最新定价为准</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status">已复制到剪贴板</div>
+  <script>
+    (()=>{
+      const models={
+        'gemini-3.8-flash':{name:'Gemini 3.8 Flash',input:.10,output:.40},
+        'gpt-6-luna':{name:'GPT-6 Luna',input:2.50,output:10.00},
+        'claude-4.5-sonnet':{name:'Claude 4.5 Sonnet',input:3.00,output:15.00},
+        'gpt-4o':{name:'GPT-4o',input:2.50,output:10.00},
+        'claude-3.7-sonnet':{name:'Claude 3.7 Sonnet',input:3.00,output:15.00}
+      };
+      const $=id=>document.getElementById(id);
+      const ids=['model','inputPrice','outputPrice','promptTokens','completionTokens','calls','provider','multiplier','exchange'];
+      const money=n=>'$'+(Number.isFinite(n)?n:0).toFixed(6);
+      const yuan=n=>'≈ ¥'+(Number.isFinite(n)?n:0).toFixed(4);
+      const safeNumber=(id,fallback=0)=>{const n=Number($(id).value);return Number.isFinite(n)&&n>=0?n:fallback};
+      function calculate(){
+        const key=$('model').value, model=models[key], custom=key==='custom';
+        $('customPrices').classList.toggle('show',custom);
+        if(model){$('inputPrice').value=model.input;$('outputPrice').value=model.output}
+        const inRate=safeNumber('inputPrice'),outRate=safeNumber('outputPrice');
+        const prompt=safeNumber('promptTokens'),completion=safeNumber('completionTokens');
+        const calls=Math.max(1,safeNumber('calls',1));
+        const rate=safeNumber('exchange'),mult=safeNumber('multiplier');
+        const inCost=prompt*inRate/1e6,outCost=completion*outRate/1e6;
+        const base=inCost+outCost,single=base*mult,total=single*calls,thousand=single*1000;
+        $('singleUsd').textContent=money(single);$('singleCny').textContent=yuan(single*rate);
+        $('totalUsd').textContent=money(total);$('totalCny').textContent=yuan(total*rate);
+        $('thousandUsd').textContent=money(thousand);$('thousandCny').textContent=yuan(thousand*rate);
+        $('inputCost').textContent=money(inCost);$('outputCost').textContent=money(outCost);$('multiplierCost').textContent=money(single);
+        const provider=$('provider');const group=provider.value==='custom'?'自定义分组':provider.options[provider.selectedIndex].text.split('（')[0];
+        $('modelCaption').textContent=(custom?'自定义模型':model.name)+' · '+group+' '+mult+'×';
+      }
+      $('model').addEventListener('change',()=>{const m=models[$('model').value];if(m){$('inputPrice').value=m.input;$('outputPrice').value=m.output}calculate()});
+      $('provider').addEventListener('change',()=>{if($('provider').value!=='custom')$('multiplier').value=$('provider').value;calculate()});
+      ids.filter(id=>id!=='model'&&id!=='provider').forEach(id=>$(id).addEventListener('input',calculate));
+      $('copyBtn').addEventListener('click',async()=>{
+        const text=[
+          'AI Token 费用估算',
+          '模型：'+$('modelCaption').textContent,
+          'Prompt：'+safeNumber('promptTokens')+' tokens；Completion：'+safeNumber('completionTokens')+' tokens',
+          '单次调用：'+$('singleUsd').textContent+' / '+$('singleCny').textContent,
+          safeNumber('calls')+' 次总成本：'+$('totalUsd').textContent+' / '+$('totalCny').textContent,
+          '1000 次：'+$('thousandUsd').textContent+' / '+$('thousandCny').textContent,
+          '汇率：1 USD = '+safeNumber('exchange')+' CNY'
+        ].join('\n');
+        try{await navigator.clipboard.writeText(text);showToast('估算结果已复制')}catch(e){const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();const ok=document.execCommand('copy');area.remove();showToast(ok?'估算结果已复制':'复制失败，请手动选择结果')}
+      });
+      let toastTimer;function showToast(message){const t=$('toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200)}
+      calculate();
+    })();
+  </script>
+</body>
+</html>
